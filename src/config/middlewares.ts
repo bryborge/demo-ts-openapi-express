@@ -1,4 +1,5 @@
 import { Express } from 'express';
+import cors from 'cors';
 
 /**
  * Sets up middlewares for the Express app.
@@ -10,6 +11,7 @@ import { Express } from 'express';
  */
 const appMiddlewares = (app: Express, express: any): void => {
   app
+    .use(cors())
     .use(express.json())
 }
 

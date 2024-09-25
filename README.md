@@ -22,7 +22,6 @@ Technologies Used:
     *   Pagination
 *   Security
     *   Authentication
-    *   CORS (Middleware)
 
 ### Project Design
 
