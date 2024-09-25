@@ -1,6 +1,11 @@
-import { createExpressOpenApiRouter } from '@blgc/openapi-router';
+// Express and OpenAPI Router
 import { Express } from 'express';
+import { createExpressOpenApiRouter } from '@blgc/openapi-router';
 import { paths } from '../generated/v1';
+// Swagger UI Docs
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+// Controllers
 import baseController from '../controllers/base.controller';
 
 /**
@@ -15,6 +20,11 @@ const appRouter = (app: Express) => {
 
   // Base controller
   openApiRouter._router.use('/', baseController);  
+  // API Docs (via Swagger UI)
+  openApiRouter._router.use('/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(YAML.load('openapi/v1.yaml'))
+  );
 }
 
 export default appRouter;
