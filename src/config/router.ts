@@ -1,27 +1,20 @@
 import { createExpressOpenApiRouter } from '@blgc/openapi-router';
 import { Express } from 'express';
-// import * as v from 'valibot';
-// import { vValidator } from 'validation-adapters/valibot';
 import { paths } from '../generated/v1';
+import baseController from '../controllers/base.controller';
 
+/**
+ * Sets up the OpenAPI router for the Express app.
+ * 
+ * @param app - The Express app.
+ * 
+ * @returns {void}
+ */
 const appRouter = (app: Express) => {
   const openApiRouter = createExpressOpenApiRouter<paths>(app);
 
-  openApiRouter.get('/', {
-    handler: (_req, res) => {
-      res.json({
-        status: 'operational',
-        uptime: Number(process.uptime()),
-        contact: {
-          email: 'support@example.com',
-          website: 'https://example.com'
-        },
-        documentation: 'https://api.example.com/docs',
-        license: 'Apache-2.0',
-        server_time: new Date().toISOString()
-      });
-    }
-  });
+  // Base controller
+  openApiRouter._router.use('/', baseController);  
 }
 
 export default appRouter;

@@ -25,7 +25,6 @@ Technologies Used:
 
 ### Project Design
 
-*   Controllers
 *   Models
 *   Database connection
 *   To Do CRUD paths, components/schemas
