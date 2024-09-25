@@ -46,8 +46,11 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         Todo: {
-            /** @example 1 */
-            id?: string;
+            /**
+             * Format: int32
+             * @example 10
+             */
+            id?: number;
             /** @example Buy groceries */
             title?: string;
             /** @example Buy milk, bread, and eggs */
@@ -121,7 +124,8 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                /** @description The ID of the todo to retrieve */
+                id: number;
             };
             cookie?: never;
         };
@@ -150,7 +154,8 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                /** @description The ID of the todo to update */
+                id: number;
             };
             cookie?: never;
         };

@@ -39,7 +39,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
-
   /todos/{id}:
     get:
       summary: Get a specific todo by ID
@@ -47,9 +46,11 @@ paths:
       parameters:
         - name: id
           in: path
+          description: The ID of the todo to retrieve
           required: true
           schema:
-            type: string
+            type: integer
+            format: int32
       responses:
         '200':
           description: The requested todo
@@ -65,9 +66,11 @@ paths:
       parameters:
         - name: id
           in: path
+          description: The ID of the todo to update
           required: true
           schema:
-            type: string
+            type: integer
+            format: int32
       requestBody:
         required: true
         content:
@@ -104,8 +107,9 @@ components:
       type: object
       properties:
         id:
-          type: string
-          example: "1"
+          type: integer
+          format: int32
+          example: 10
         title:
           type: string
           example: "Buy groceries"

@@ -17,6 +17,9 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "express": "^4.21.0"
+    "@blgc/openapi-router": "^0.0.20",
+    "express": "^4.21.0",
+    "valibot": "^0.42.1",
+    "validation-adapters": "^0.0.11"
   }
 }
