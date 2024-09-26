@@ -1,16 +1,18 @@
-class HomeController {
+import BaseController from './base.controller';
 
-  constructor(private openApiRouter: any) {
+class HomeController extends BaseController {
+  constructor(openApiRouter: any) {
+    super(openApiRouter);
     this.initializeRoutes();
   }
 
-  private initializeRoutes() {
+  protected initializeRoutes(): void {
     this.openApiRouter.get('/', {
-      handler: this.get
+      handler: this.getStatus,
     });
   }
 
-  public get = (_req: any, res: any) => {
+  private getStatus = (_req: any, res: any) => {
     res.json({
       status: 'operational',
       uptime: Number(process.uptime()),
@@ -22,7 +24,7 @@ class HomeController {
       license: 'Apache-2.0',
       server_time: new Date().toISOString()
     });
-  }
+  };
 }
 
 export default HomeController;

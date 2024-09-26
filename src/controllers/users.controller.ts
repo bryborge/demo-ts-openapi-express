@@ -1,12 +1,15 @@
 import * as v from 'valibot';
 import { vValidator } from 'validation-adapters/valibot';
 
-class UsersController {
-  constructor(private openApiRouter: any) {
+import BaseController from './base.controller';
+
+class UsersController extends BaseController {
+  constructor(openApiRouter: any) {
+    super(openApiRouter);
     this.initializeRoutes();
   }
 
-  private initializeRoutes() {
+  protected initializeRoutes(): void {
     this.openApiRouter.get('/users/{userId}', {
       pathValidator: vValidator(
         v.object({
