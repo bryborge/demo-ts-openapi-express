@@ -93,7 +93,8 @@ paths:
           required: true
           description: ID of the user to retrieve
           schema:
-            type: string
+            type: integer
+            format: int64
       responses:
         '200':
           description: A single user
@@ -151,7 +152,8 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          format: int64
         username:
           type: string
         email:
