@@ -150,15 +150,14 @@ components:
     User:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
+        _id:
+          type: string
         username:
           type: string
         email:
           type: string
       required:
-        - id
+        - _id
         - username
         - email
 
