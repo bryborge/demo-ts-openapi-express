@@ -1,5 +1,5 @@
-// import * as v from 'valibot';
-// import { vValidator } from 'validation-adapters/valibot';
+import * as v from 'valibot';
+import { vValidator } from 'validation-adapters/valibot';
 // import { operations } from '../generated/v1';
 
 // Type Definitions
@@ -20,14 +20,14 @@ class UsersController extends BaseController {
       handler: this.getUsers,
     });
 
-    // this.openApiRouter.get('/users/{userId}', {
-    //   pathValidator: vValidator(
-    //     v.object({
-    //       userId: v.number(),
-    //     })  
-    //   ),
-    //   handler: this.getUserById,
-    // });
+    this.openApiRouter.get('/users/{username}', {
+      pathValidator: vValidator(
+        v.object({
+          username: v.string(),
+        })  
+      ),
+      handler: this.getUserByUsername,
+    });
   }
 
   private async getUsers(_req: Request, res: Response) {
@@ -39,19 +39,19 @@ class UsersController extends BaseController {
     }
   }
 
-  // private async getUserById(req: Request, res: Response) {
-  //   try {
-  //     const userId = req.params.userId;
-  //     const user = await UserModel.findById(userId);
+  private async getUserByUsername(req: Request, res: Response) {
+    try {
+      const username = req.params.username;
+      const user = await UserModel.findOne({ username });
 
-  //     if (!user) {
-  //       return res.status(404).json({ message: 'User not found' });
-  //     }
-  //     res.status(200).json(user);
-  //   } catch (error) {
-  //     res.status(500).json({ message: 'Error fetching user', error });
-  //   }
-  // }
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching user', error });
+    }
+  }
 }
 
 export default UsersController;
