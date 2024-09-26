@@ -1,21 +1,25 @@
 import { Express } from 'express';
+import { MongoAdapter } from '../db/mongoAdapter';
+import { env } from 'process';
 
 /**
- * Initializes an Express app and starts it on a port specified in the
- * environment (APP_PORT). If the port is not specified, it defaults to 8080.
+ * Initializes the Express app.
  *
- * Logs a success message if the app is successfully started, or an error
- * message if the app fails to start.
+ * @param {Express} app - The Express app.
  *
- * @param app - The Express app to initialize.
- * 
- * @returns {void}
+ * @returns {Promise<void>} A promise that resolves when the app is listening.
  */
-const appInit = (app: Express): void => {
+const appInit = async (app: Express): Promise<void> => {
+  const mongoUri = env.MONGO_URI || 'mongodb://localhost:27017';
+  const mongoDbName = env.MONGO_DB_NAME || 'todoApp';
+
+  const dbAdapter = new MongoAdapter(mongoUri, mongoDbName);
+
   try {
     const PORT = Number(process.env.APP_PORT) || 8080;
 
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
+      await dbAdapter.connect();
       console.log(`Server started on port ${PORT}`);
     });
   } catch(error: unknown) {
