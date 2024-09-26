@@ -91,7 +91,6 @@ that :P ).
 ### Project Design
 
 *   Models
-*   Database connection
 *   To-do CRUD paths, components/schemas
 *   To-do CRUD paths, components/schemas
 *   Request validation (with Zod or Valibot w/ validation-adapters/valibot)
