@@ -1,4 +1,4 @@
-import BaseController from './base.controller';
+import BaseController from './BaseController';
 
 class HomeController extends BaseController {
   constructor(openApiRouter: any) {

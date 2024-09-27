@@ -5,9 +5,9 @@ import { operations } from '../generated/v1';
 // Type Definitions
 import { Request, Response } from 'express';
 // Models
-import UserModel from '../models/UserModel';
+import { UserModel, IUser, UserInput } from '../models/UserModel';
 // Base Controller
-import BaseController from './base.controller';
+import BaseController from './BaseController';
 
 class UsersController extends BaseController {
   constructor(openApiRouter: any) {
