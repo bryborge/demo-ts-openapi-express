@@ -71,12 +71,13 @@ class UsersController extends BaseController {
    * 
    * @returns {Promise<void>} A promise that resolves when the operation is complete.
    */
-  private async getUsers(_req: Request, res: Response) {
+  private async getUsers(req: Request, res: Response) {
     try {
       const users = await UserModel.find({});
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching users', error });
+      console.error('Error fetching users:', error);
+      res.status(500).json({ message: 'Error fetching users', error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -86,19 +87,20 @@ class UsersController extends BaseController {
    * @param req The Express request object.
    * @param res The Express response object.
    * 
-   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @returns {Promise<void | Response>} A promise that resolves when the operation is complete.
    */
-  private async getUserByUsername(req: Request, res: Response) {
+  private async getUserByUsername(req: Request, res: Response): Promise<void | Response> {
     try {
       const username = req.params.username;
       const user = await UserModel.findOne({ username });
-
+      
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching user', error });
+      console.error('Error fetching user:', error);
+      res.status(500).json({ message: 'Error fetching user', error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -110,11 +112,12 @@ class UsersController extends BaseController {
    *
    * @returns {Promise<void>} A promise that resolves when the operation is complete.
    */
-  public async createUser(req: Request, res: Response) {
+  public async createUser(req: Request, res: Response): Promise<void> {
     try {
-      const userData: operations['createUser']['requestBody']['content']['application/json'] = req.body;
-      const user = await UserModel.create(userData);
-      res.status(201).json(user);
+      const userData: UserInput = req.body;
+      const newUser = new UserModel(userData);
+      const savedUser = await newUser.save();
+      res.status(201).json(savedUser);
     } catch (error) {
       console.error('Error creating user:', error);
       res.status(400).json({ message: 'Error creating user', error: error instanceof Error ? error.message : String(error) });
@@ -127,12 +130,12 @@ class UsersController extends BaseController {
    * @param req The Express request object.
    * @param res The Express response object.
    * 
-   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @returns {Promise<void | Response>} A promise that resolves when the operation is complete.
    */
-  private async updateUser(req: Request, res: Response) {
+  private async updateUser(req: Request, res: Response): Promise<void | Response> {
     try {
       const username = req.params.username;
-      const userData: operations['updateUser']['requestBody']['content']['application/json'] = req.body;
+      const userData: UserInput = req.body;
       
       const updatedUser = await UserModel.findOneAndUpdate({ username }, userData, { new: true });
       
@@ -152,12 +155,12 @@ class UsersController extends BaseController {
    * @param req The Express request object.
    * @param res The Express response object.
    * 
-   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @returns {Promise<void | Response>} A promise that resolves when the operation is complete.
    */
-  private async deleteUser(req: Request, res: Response) {
+  private async deleteUser(req: Request, res: Response): Promise<void | Response> {
     try {
       const username = req.params.username;
-      const deletedUser = await UserModel.findOneAndDelete({username});
+      const deletedUser = await UserModel.findOneAndDelete({ username });
       
       if (!deletedUser) {
         return res.status(404).json({ message: 'User not found' });
