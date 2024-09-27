@@ -6,7 +6,8 @@ import { paths } from '../generated/v1';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 // Controllers
-import baseController from '../controllers/base.controller';
+import HomeController from '../controllers/home.controller';
+import UsersController from '../controllers/users.controller';
 
 /**
  * Sets up the OpenAPI router for the Express app.
@@ -18,8 +19,10 @@ import baseController from '../controllers/base.controller';
 const appRouter = (app: Express) => {
   const openApiRouter = createExpressOpenApiRouter<paths>(app);
 
-  // Base controller
-  openApiRouter._router.use('/', baseController);  
+  // Home controller
+  new HomeController(openApiRouter);
+  // Users controller
+  new UsersController(openApiRouter);
   // API Docs (via Swagger UI)
   openApiRouter._router.use('/docs',
     swaggerUi.serve,
