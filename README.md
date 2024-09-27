@@ -68,9 +68,7 @@ Following is a list of work I intend to work through before calling this demo "c
 
 ### Project Design
 
-*   Models
 *   To-do CRUD paths, components/schemas
-*   Request validation (with Zod or Valibot w/ validation-adapters/valibot)
 
 ### Dev Tooling
 
