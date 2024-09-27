@@ -1,11 +1,10 @@
-import * as v from 'valibot';
-import { vValidator } from 'validation-adapters/valibot';
-import { operations } from '../generated/v1';
-
 // Type Definitions
 import { Request, Response } from 'express';
+// Validators
+import * as v from 'valibot';
+import { vValidator } from 'validation-adapters/valibot';
 // Models
-import { UserModel, IUser, UserInput } from '../models/UserModel';
+import { UserModel, UserInput } from '../models/UserModel';
 // Base Controller
 import BaseController from './BaseController';
 
