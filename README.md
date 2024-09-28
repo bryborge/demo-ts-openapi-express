@@ -2,27 +2,10 @@
 
 This is a work in progress and a deep-dive learning activity to scratch an itch I've been having.
 
-## Preamble
-
-I should probably start by saying that I generally believe that JavaScript should remain on the client-side of the
-technology stack. "Just because you can doesn't mean you should" is something I will argue any time writing server-side
-JS is proposed. Yes, the ecosystem has evolved to be able to do it. No, I don't think it's generally a better fit
-than, say, Python, Go, Rust, Java, C#, ... Ruby.
-
-**However!** There are many fine reasons to go this route. For example, say you have a JavaScript-heavy team of
-engineers in your organization and it will likely be a) too costly to hire for specialization in another language, or
-b) too painful for them to learn a new language/framework in the amount of time you have to get the project done.
-
-Besides, at the end of the day, it doesn't **actually** matter what language(s) or framework(s) one chooses. At least,
-not nearly as much as we might sometimes think it does. So ...
-
 ## Purpose
 
-Given that preamble, why this project?  Why demo a server-side RESTful API written in JavaScript at all?
-
-Well, if you must do it, then it should be done in a way that supports the longevity and overall success of the project
-or initiative you're doing it for. To that end, I have found it challenging to dig up any sane and thoroughly documented
-projects that use JavaScript while also demonstrating the following:
+I have found it challenging to dig up any sane and thoroughly documented projects that use JavaScript while also
+demonstrating the following:
 
 *   Strict typing
 *   Composability and scalability
@@ -40,9 +23,11 @@ and designing it against a widely adopted standard like OAS, you are more likely
 easy-to-understand, well-documented, and maintainable piece of software.  Invariably, this also will more likely result
 in less friction during development and a generally nicer developer experience.
 
+That's the idea anyway.
+
 ## Technologies Used
 
-*   OpenAPI (contract-first development methodology)
+*   OpenAPI Specification
 *   Typescript
 *   Express
 *   Auth0
