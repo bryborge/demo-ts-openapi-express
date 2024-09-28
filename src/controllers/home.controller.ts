@@ -1,4 +1,4 @@
-import BaseController from './BaseController';
+import BaseController from './base.controller';
 
 class HomeController extends BaseController {
   /**

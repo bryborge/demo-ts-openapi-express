@@ -6,8 +6,8 @@ import { paths } from '../generated/v1';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 // Controllers
-import HomeController from '../controllers/HomeController';
-import UsersController from '../controllers/UsersController';
+import HomeController from '../controllers/home.controller';
+import UsersController from '../controllers/users.controller';
 
 /**
  * Sets up the Swagger UI endpoint at /docs.

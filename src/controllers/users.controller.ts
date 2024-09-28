@@ -4,9 +4,9 @@ import { Request, Response } from 'express';
 import * as v from 'valibot';
 import { vValidator } from 'validation-adapters/valibot';
 // Models
-import { UserModel, UserInput } from '../models/UserModel';
+import { UserModel, UserInput } from '../models/user.model';
 // Base Controller
-import BaseController from './BaseController';
+import BaseController from './base.controller';
 
 class UsersController extends BaseController {
   /**
