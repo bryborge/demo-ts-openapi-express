@@ -53,6 +53,9 @@ Following is a list of work I intend to work through before calling this demo "c
 
 ### General
 
+*   Behavior
+    *   Error handling
+    *   Validations
 *   Testing
     *   Unit
     *   Integration
