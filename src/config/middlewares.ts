@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import cors from 'cors';
+import { jwtCheck } from '../auth/auth';
 
 /**
  * Sets up middlewares for the Express app.
@@ -13,6 +14,7 @@ const appMiddlewares = (app: Express, express: any): void => {
   app
     .use(cors())
     .use(express.json())
+    .use(jwtCheck)
 }
 
 export default appMiddlewares;

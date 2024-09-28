@@ -146,6 +146,11 @@ paths:
           description: User not found
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
   schemas:
     User:
       type: object
@@ -171,3 +176,6 @@ components:
       required:
         - username
         - email
+
+security:
+  - bearerAuth: []

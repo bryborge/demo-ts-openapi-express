@@ -9,6 +9,13 @@ import YAML from 'yamljs';
 import HomeController from '../controllers/HomeController';
 import UsersController from '../controllers/UsersController';
 
+const docRouter = (app: Express) => {
+  app.use('/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(YAML.load('openapi/v1.yaml'))
+  );
+};
+
 /**
  * Sets up the OpenAPI router for the Express app.
  * 
@@ -23,11 +30,6 @@ const appRouter = (app: Express) => {
   new HomeController(openApiRouter);
   // Users controller
   new UsersController(openApiRouter);
-  // API Docs (via Swagger UI)
-  openApiRouter._router.use('/docs',
-    swaggerUi.serve,
-    swaggerUi.setup(YAML.load('openapi/v1.yaml'))
-  );
 }
 
-export default appRouter;
+export { appRouter, docRouter};
