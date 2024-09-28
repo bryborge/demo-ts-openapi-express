@@ -9,6 +9,13 @@ import YAML from 'yamljs';
 import HomeController from '../controllers/HomeController';
 import UsersController from '../controllers/UsersController';
 
+/**
+ * Sets up the Swagger UI endpoint at /docs.
+ *
+ * @param {Express} app - The Express app.
+ *
+ * @return {void}
+ */
 const docRouter = (app: Express) => {
   app.use('/docs',
     swaggerUi.serve,

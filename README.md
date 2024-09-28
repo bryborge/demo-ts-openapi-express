@@ -45,6 +45,7 @@ in less friction during development and a generally nicer developer experience.
 *   OpenAPI (contract-first development methodology)
 *   Typescript
 *   Express
+*   Auth0
 
 ## Future Work
 
@@ -63,8 +64,6 @@ Following is a list of work I intend to work through before calling this demo "c
 *   Performance (and Scalability/Resilience)
     *   Rate Limiting
     *   Pagination
-*   Security
-    *   Authentication
 
 ### Project Design
 
@@ -103,3 +102,4 @@ localhost:8080/docs
 ## Further Reading
 
 *   [The OpenAPI Specification (Github)](https://github.com/OAI/OpenAPI-Specification)
+*   [Auth0 JWT Documentation](https://auth0.com/docs/secure/tokens/json-web-tokens)

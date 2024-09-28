@@ -9,6 +9,6 @@ import appMiddlewares from './config/middlewares';
 import { docRouter, appRouter } from './config/router';
 
 void appInit(app);
-void docRouter(app); // setup docs/ endpoint before we set auth and other middleware
+void docRouter(app); // setup docs endpoint before middleware
 void appMiddlewares(app, express);
 void appRouter(app);
