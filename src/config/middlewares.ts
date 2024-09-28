@@ -13,8 +13,12 @@ import { jwtCheck } from '../auth/auth';
 const appMiddlewares = (app: Express, express: any): void => {
   app
     .use(cors())
-    .use(express.json())
-    .use(jwtCheck)
+    .use(express.json());
+  
+  // Enable Auth0 in all environments other than development.
+  if (app.get('env') !== 'development') {
+    app.use(jwtCheck);
+  }
 }
 
 export default appMiddlewares;
