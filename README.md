@@ -45,6 +45,7 @@ in less friction during development and a generally nicer developer experience.
 *   OpenAPI (contract-first development methodology)
 *   Typescript
 *   Express
+*   Auth0
 
 ## Future Work
 
@@ -63,8 +64,6 @@ Following is a list of work I intend to work through before calling this demo "c
 *   Performance (and Scalability/Resilience)
     *   Rate Limiting
     *   Pagination
-*   Security
-    *   Authentication
 
 ### Project Design
 
@@ -92,6 +91,12 @@ Following is a list of work I intend to work through before calling this demo "c
 
 Check out the API in the browser and/or with `curl`, `postman`, or any other favorite API tools.
 
+### Auth0
+
+This project uses Auth0 to secure all API endpoints (the /docs pages are publicly available). To use this API, you will
+need a valid JWT sent as an `authorization` header of your requests.  For ease of development, Auth0 is not enabled when
+the application environment is set to `development`.
+
 ### API Documentation
 
 The documentation for the API is automatically generated from the openapi specification file and can be accessed at:
@@ -103,3 +108,4 @@ localhost:8080/docs
 ## Further Reading
 
 *   [The OpenAPI Specification (Github)](https://github.com/OAI/OpenAPI-Specification)
+*   [Auth0 JWT Documentation](https://auth0.com/docs/secure/tokens/json-web-tokens)

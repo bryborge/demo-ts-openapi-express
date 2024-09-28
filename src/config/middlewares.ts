@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import cors from 'cors';
+import { jwtCheck } from '../auth/auth';
 
 /**
  * Sets up middlewares for the Express app.
@@ -12,7 +13,12 @@ import cors from 'cors';
 const appMiddlewares = (app: Express, express: any): void => {
   app
     .use(cors())
-    .use(express.json())
+    .use(express.json());
+  
+  // Enable Auth0 in all environments other than development.
+  if (app.get('env') !== 'development') {
+    app.use(jwtCheck);
+  }
 }
 
 export default appMiddlewares;
