@@ -1,15 +1,23 @@
 import BaseController from './BaseController';
 
 class HomeController extends BaseController {
+  /**
+   * Initializes a new instance of the HomeController class.
+   *
+   * @param {any} openApiRouter The OpenAPI Express router to use for the controller.
+   */
   constructor(openApiRouter: any) {
     super(openApiRouter);
     this.initializeRoutes();
   }
 
   /**
-   * Initialize the routes for the Home controller.
+   * Initializes the routes for the Home controller.
+   *
+   * @returns {void}
    */
   protected initializeRoutes(): void {
+    // GET /
     this.openApiRouter.get('/', {
       handler: this.getStatus,
     });
@@ -18,10 +26,14 @@ class HomeController extends BaseController {
   /**
    * Retrieves the current status of the API.
    *
+   * The status will contain the uptime of the API, the contact information for
+   * the maintainers, a link to the API documentation, the license under which
+   * the API is released, and the current time of the server.
+   *
    * @param _req The Express request object.
    * @param res The Express response object.
    *
-   * @returns {Promise<void>} A promise that resolves when the operation is complete.
+   * @returns {void}
    */
   private getStatus(_req: any, res: any): void {
     res.json({

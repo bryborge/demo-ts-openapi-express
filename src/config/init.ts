@@ -10,15 +10,28 @@ import { dbConnect } from '../services/db/mongo';
  */
 const appInit = async (app: Express): Promise<void> => {
   try {
+    await dbConnect();
+
     const PORT = Number(process.env.APP_PORT) || 8080;
 
-    app.listen(PORT, async () => {
-      await dbConnect();
-      console.log(`Server started on port ${PORT}`);
+    await new Promise<void>((resolve, reject) => {
+      app.listen(PORT, (error?: Error) => {
+        if (error) {
+          reject(error);
+        } else {
+          console.log(`Server started on port ${PORT}`);
+          resolve();
+        }
+      });
     });
   } catch(error: unknown) {
-    console.log('Unable to start the app!');
-    console.error(error);
+    if (error instanceof Error) {
+      console.error('Error during app initialization:', error.message);
+    } else {
+      console.error('Unknown error during app initialization:', error);
+    }
+
+    process.exit(1);
   }
 };
 

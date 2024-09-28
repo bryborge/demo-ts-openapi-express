@@ -1,4 +1,4 @@
-import { env, exit } from 'process';
+import { env } from 'process';
 import mongoose from 'mongoose';
 
 /**
@@ -22,13 +22,32 @@ export const dbConnect = async (): Promise<void> => {
   const mongoPassword = env.MONGO_PASSWORD as string;
   const mongoHost = env.MONGO_HOST as string;
   const mongoPort = Number(env.MONGO_PORT) || 27017;
+
+  if (!mongoDbName || !mongoUsername || !mongoPassword || !mongoHost) {
+    console.error('Missing one or more MongoDB connection parameters in environment variables. Exiting...');
+    process.exit(1);
+  }
+
   const mongoUri = `mongodb://${mongoUsername}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDbName}?authSource=admin`;
 
-  try {
-    await mongoose.connect(mongoUri);
-    console.log(`Connected to MongoDB: ${mongoDbName}`);
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-    exit(1);
+  let retries = 3;
+
+  while (retries > 0) {
+    try {
+      await mongoose.connect(mongoUri);
+      console.log(`Connected to MongoDB (${mongoDbName})`);
+      break;
+    } catch (error) {
+      retries -= 1;
+      console.error(`Error connecting to MongoDB: ${error instanceof Error ? error.message : error}. Retries left: ${retries}`);
+
+      if (retries === 0) {
+        console.error('Could not connect to MongoDB after multiple attempts. Exiting...');
+        process.exit(1);
+      }
+
+      // Wait for a short period before retrying
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
   }
 }

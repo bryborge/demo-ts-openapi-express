@@ -9,13 +9,18 @@ import { UserModel, UserInput } from '../models/UserModel';
 import BaseController from './BaseController';
 
 class UsersController extends BaseController {
+  /**
+   * Initializes a new instance of the UsersController class.
+   *
+   * @param {any} openApiRouter The OpenAPI Express router to use for the controller.
+   */
   constructor(openApiRouter: any) {
     super(openApiRouter);
     this.initializeRoutes();
   }
 
   /**
-   * Initialize the routes for the Users controller.
+   * Initializes the routes for the Users controller.
    *
    * This method sets up and type-validates the following routes:
    *
@@ -26,10 +31,12 @@ class UsersController extends BaseController {
    * - `DELETE /users/{username}`: Deletes the user with the given username.
    */
   protected initializeRoutes(): void {
+    // GET /users
     this.openApiRouter.get('/users', {
       handler: this.getUsers,
     });
 
+    // GET /users/{username}
     this.openApiRouter.get('/users/{username}', {
       pathValidator: vValidator(
         v.object({
@@ -39,10 +46,12 @@ class UsersController extends BaseController {
       handler: this.getUserByUsername,
     });
 
+    // POST /users
     this.openApiRouter.post('/users', {
       handler: this.createUser,
     });
 
+    // PUT /users/{username}
     this.openApiRouter.put('/users/{username}', {
       pathValidator: vValidator(
         v.object({
@@ -52,6 +61,7 @@ class UsersController extends BaseController {
       handler: this.updateUser,
     });
 
+    // DELETE /users/{username}
     this.openApiRouter.del('/users/{username}', {
       pathValidator: vValidator(
         v.object({
@@ -70,7 +80,7 @@ class UsersController extends BaseController {
    * 
    * @returns {Promise<void>} A promise that resolves when the operation is complete.
    */
-  private async getUsers(req: Request, res: Response) {
+  private async getUsers(_req: Request, res: Response): Promise<void> {
     try {
       const users = await UserModel.find({});
       res.status(200).json(users);

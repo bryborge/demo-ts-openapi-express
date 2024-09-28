@@ -26,7 +26,7 @@ const docRouter = (app: Express) => {
 /**
  * Sets up the OpenAPI router for the Express app.
  * 
- * @param app - The Express app.
+ * @param {Express} app - The Express app.
  * 
  * @returns {void}
  */
