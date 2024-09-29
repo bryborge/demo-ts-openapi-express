@@ -42,7 +42,6 @@ Following is a list of work I intend to work through before calling this demo "c
     *   Error handling
     *   Validations
 *   Testing
-    *   Unit
     *   Integration
 *   Observability (MELT)
     *   Monitoring

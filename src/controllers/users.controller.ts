@@ -124,7 +124,12 @@ class UsersController extends BaseController {
       const userData: UserInput = req.body;
       const newUser = new UserModel(userData);
       const savedUser = await newUser.save();
-      res.status(201).json(savedUser);
+
+      if (!savedUser) {
+        res.status(400).json({ message: 'Error creating user' });
+      } else {
+        res.status(201).json(savedUser);
+      }
     } catch (error) {
       res.status(400).json({ message: 'Error creating user', error: error instanceof Error ? error.message : String(error) });
     }
