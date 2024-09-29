@@ -85,7 +85,6 @@ class UsersController extends BaseController {
       const users = await UserModel.find({});
       res.status(200).json(users);
     } catch (error) {
-      console.error('Error fetching users:', error);
       res.status(500).json({ message: 'Error fetching users', error: error instanceof Error ? error.message : String(error) });
     }
   }
@@ -108,7 +107,6 @@ class UsersController extends BaseController {
       }
       res.status(200).json(user);
     } catch (error) {
-      console.error('Error fetching user:', error);
       res.status(500).json({ message: 'Error fetching user', error: error instanceof Error ? error.message : String(error) });
     }
   }
@@ -126,9 +124,13 @@ class UsersController extends BaseController {
       const userData: UserInput = req.body;
       const newUser = new UserModel(userData);
       const savedUser = await newUser.save();
-      res.status(201).json(savedUser);
+
+      if (!savedUser) {
+        res.status(400).json({ message: 'Error creating user' });
+      } else {
+        res.status(201).json(savedUser);
+      }
     } catch (error) {
-      console.error('Error creating user:', error);
       res.status(400).json({ message: 'Error creating user', error: error instanceof Error ? error.message : String(error) });
     }
   }
@@ -153,7 +155,6 @@ class UsersController extends BaseController {
       }
       res.status(200).json(updatedUser);
     } catch (error) {
-      console.error('Error updating user:', error);
       res.status(400).json({ message: 'Error updating user', error: error instanceof Error ? error.message : String(error) });
     }
   }
@@ -176,7 +177,6 @@ class UsersController extends BaseController {
       }
       res.status(204).send();
     } catch (error) {
-      console.error('Error deleting user:', error);
       res.status(500).json({ message: 'Error deleting user', error: error instanceof Error ? error.message : String(error) });
     }
   }
