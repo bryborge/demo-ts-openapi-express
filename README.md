@@ -78,6 +78,16 @@ Following is a list of work I intend to work through before calling this demo "c
 
 Check out the API in the browser and/or with `curl`, `postman`, or any other favorite API tools.
 
+### Tests
+
+Jest and Supertest are used for unit testing. You can run unit tests with the following command:
+
+```sh
+npm run test
+```
+
+You can also manually test the endpoints using the API Swagger docs.
+
 ### Auth0
 
 This project uses Auth0 to secure all API endpoints (the /docs pages are publicly available). To use this API, you will
