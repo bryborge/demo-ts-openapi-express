@@ -41,7 +41,7 @@ class UsersController extends BaseController {
       pathValidator: vValidator(
         v.object({
           username: v.string(),
-        })  
+        })
       ),
       handler: this.getUserByUsername,
     });
@@ -56,7 +56,7 @@ class UsersController extends BaseController {
       pathValidator: vValidator(
         v.object({
           username: v.string(),
-        })  
+        })
       ),
       handler: this.updateUser,
     });
@@ -66,7 +66,7 @@ class UsersController extends BaseController {
       pathValidator: vValidator(
         v.object({
           username: v.string(),
-        })  
+        })
       ),
       handler: this.deleteUser,
     });
